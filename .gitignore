@@ -1,0 +1,4 @@
+# files those should be untracked
+
+.pyc
+.idea/*
