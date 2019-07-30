@@ -24,19 +24,19 @@ class Dots:
 
     def __add__(self, other):
         x, y, z = self.get_x() + other.get_x(), self.get_y() + other.get_y(), self.get_z() + other.get_z()
-        return x, y, z
+        return Dots(x, y, z)
 
     def __sub__(self, other):
         x, y, z = self.get_x() - other.get_x(), self.get_y() - other.get_y(), self.get_z() - other.get_z()
-        return x, y, z
+        return Dots(x, y, z)
 
     def __mul__(self, other):
         x, y, z = self.get_x() * other.get_x(), self.get_y() * other.get_y(), self.get_z() * other.get_z()
-        return x, y, z
+        return Dots(x, y, z)
 
     def __truediv__(self, other):
         x, y, z = self.get_x() / other.get_x(), self.get_y() / other.get_y(), self.get_z() / other.get_z()
-        return x, y, z
+        return Dots(x, y, z)
 
     def __repr__(self):
         return f'x = {self._x}, y = {self._y}, z = {self._z}'
