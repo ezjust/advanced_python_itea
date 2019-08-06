@@ -5,7 +5,7 @@ class File:
 
     def __enter__(self):
         f = open(self._file_name, f'{self._what_to_do}')
-        return f.read()
+        return f
 
     def __exit__(self, *args):
         if ValueError in args:
