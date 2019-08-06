@@ -17,4 +17,4 @@ class File:
 
 
 with File('test.txt', 'r') as f:
-    print(f)
+    print(f.read())
