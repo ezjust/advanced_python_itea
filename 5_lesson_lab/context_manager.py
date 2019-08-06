@@ -4,8 +4,8 @@ class File:
         self._what_to_do = what_to_do
 
     def __enter__(self):
-        with open(self._file_name, f'{self._what_to_do}') as f:
-            return f.read()
+        f = open(self._file_name, f'{self._what_to_do}')
+        return f.read()
 
     def __exit__(self, *args):
         if ValueError in args:
