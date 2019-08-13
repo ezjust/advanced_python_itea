@@ -7,7 +7,6 @@ class Stack:
 
     def add(self, data):
         self.things.append(data)
-        return f'New thing {data} is added'
 
     def remove(self, data):
         if data in self.things:
@@ -20,11 +19,15 @@ class Stack:
         return "That's it"
 
 
+# Stack demo
 s = Stack()
-print(s.is_empty())
-print(s.add('first_thing'))
-print(s.is_empty())
-print(s.add('second_thing'))
-print(s.add('third_thing'))
-print(s.remove('second_thing'))
+
+for i in range(10):
+    s.add(f'new_thing_{i}')
+
 print(s.print_all())
+
+
+
+
+
