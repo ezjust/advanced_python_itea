@@ -1,0 +1,11 @@
+<html>
+    <header>
+        <title>{{title}}</title>
+    </header>
+    <body>
+
+    {% for student in students.items() %}
+    <b><p>{{student[0]}} has mark: {{student[1]}}</p></b>
+    {% endfor %}
+    </body>
+</html>
