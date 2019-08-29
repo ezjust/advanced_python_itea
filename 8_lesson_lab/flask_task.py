@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask import render_template
 
 app = Flask(__name__)
@@ -24,10 +24,28 @@ def hello_world():
 students = {'Vasya': 5, 'EZ': 5, 'Anna': 5, 'Misha': 4}
 
 
+@app.route("/testid<int:id>")
+def test_id(id):
+    print(id)
+    return 'haha'
+
+
+@app.route("/form")
+def form_insertion():
+    return render_template("form_example.html")
+
+
 @app.route("/new_route")
 def new_route():
     title = 'Students list with marks'
     return render_template("index.html", students=students, title=title)
+
+
+@app.route('/index', methods=["GET", "POST"])
+def index_page():
+    print(dict(request.get_json()))
+    print(request.user_agent)
+    return 'form approved'
 
 
 if __name__ == "__main__":
