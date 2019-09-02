@@ -16,16 +16,15 @@ def my_links_decorator(links: list):
 
     def inner(custom_function):
 
-        count = 0
-        for link in links:
-            thread = Thread(target=custom_function, args=(link, 0), name=f'thread_{count}')
+        for i in len(links):
+            thread = Thread(target=custom_function, args=(links[i], 0), name=f'thread_{i}')
             thread.start()
-            print(f'file started to be downloaded from link {link}')
+            print(f'file started to be downloaded from link {links[i]}')
             while thread.is_alive():
                 print('file download is in progress')
                 time.sleep(2)
-            print(f"file {(link.split('/')[-1])} has been downloaded as link_{count}")
-            count += 1
+            print(f"file {(link.split('/')[-1])} has been downloaded as link_{i}")
+
         return 'decorator ended'
     return inner
 
