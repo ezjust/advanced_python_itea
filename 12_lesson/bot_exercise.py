@@ -28,48 +28,43 @@ def hello(message):
 
 
 @bot.message_handler(func=lambda m: read_from_shelve('state') == 0)
-def username(message):
+def username_handler(message):
     if message.text != 'start' and message.text != '':
         user_data['username'] = message.text
+        bot.send_message(message.chat.id, '-------------\nEmail:\n------------')
         write_to_shelve('state', 1)
 
 
 @bot.message_handler(func=lambda m: read_from_shelve('state') == 1)
-def insert_email(message):
-    bot.send_message(message.chat.id, '-------------\nEmail:\n------------')
+def email_handler(message):
     if message.text != '':
         user_data['email'] = message.text
+        bot.send_message(message.chat.id, '------------\nPhone:\n------------')
         write_to_shelve('state', 2)
 
 
 @bot.message_handler(func=lambda m: read_from_shelve('state') == 2)
-def insert_phone(message):
-    bot.send_message(message.chat.id, '------------\nPhone:\n------------')
+def phone_handler(message):
     if message.text != '':
         user_data['phone'] = message.text
+        bot.send_message(message.chat.id, '------------\nAddress:\n------------')
         write_to_shelve('state', 3)
 
 
 @bot.message_handler(func=lambda m: read_from_shelve('state') == 3)
-def insert_address(message):
-    bot.send_message(message.chat.id, '------------\nAddress:\n------------')
+def address_handler(message):
     user_data['address'] = message.text
+    bot.send_message(message.chat.id, '-------------\nWishes:\n-------------')
     write_to_shelve('state', 4)
 
 
 @bot.message_handler(func=lambda m: read_from_shelve('state') == 4)
-def insert_comment(message):
-    bot.send_message(message.chat.id, '-------------\nWishes:\n-------------')
+def comment_handler(message):
     user_data['wishes'] = message.text
-    write_to_shelve('state', 5)
+    bot.send_message(message.chat.id, 'Hooray!!!User successfully saved')
     print(user_data)
     new_user = User(username=user_data['username'], email=user_data['email'], phone=user_data['phone'], address=user_data['address'], wishes=user_data['wishes'])
     new_user.save()
-
-
-@bot.message_handler(func=lambda m: read_from_shelve('state') == 5)
-def insert_comment(message):
-    bot.send_message(message.chat.id, 'Hooray!!!User successfully saved')
 
 
 if __name__ == '__main__':
