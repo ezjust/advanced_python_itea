@@ -22,14 +22,14 @@ def read_from_shelve(key):
 
 @bot.message_handler(commands=['start'])
 def hello(message):
-    bot.send_message(message.chat.id, 'Hello, this is telegram bot that collect data about user')
+    bot.send_message(message.chat.id, 'Hello, this is telegram bot that collect data about user'
+                                      '\n\n------------\nNew User:\n------------')
     write_to_shelve('state', 0)
 
 
 @bot.message_handler(func=lambda m: read_from_shelve('state') == 0)
 def username(message):
-    bot.send_message(message.chat.id, '\n\n------------\nNew User:\n------------')
-    if message.text != '':
+    if message.text != 'start' and message.text != '':
         user_data['username'] = message.text
         write_to_shelve('state', 1)
 
